@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "modern-clothing-store-angular": {
+    "noir-store": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist/noir-store",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -57,10 +58,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "modern-clothing-store-angular:build:production"
+              "buildTarget": "noir-store:build:production"
             },
             "development": {
-              "buildTarget": "modern-clothing-store-angular:build:development"
+              "buildTarget": "noir-store:build:development"
             }
           },
           "defaultConfiguration": "development"
