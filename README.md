@@ -1,59 +1,53 @@
-# ModernClothingStoreAngular
+# NOIR Store — E-commerce
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+![Angular](https://img.shields.io/badge/Angular-21-DD0031?style=for-the-badge&logo=angular)
+![Node](https://img.shields.io/badge/Node-24-339933?style=for-the-badge&logo=nodedotjs)
 
-## Development server
+A **NOIR Store** é uma plataforma de moda que redefine a experiência de compra digital através de um design minimalista e uma arquitetura técnica. 
 
-To start a local development server, run:
+---
+
+### Destaques do Projeto
+
+*  **Estética Noir**: Interface baseada em tons monocromáticos e tipografia elegante.
+*  **Performance Extrema**: Desenvolvido com Angular e Signals para reatividade máxima.
+*  **Transições Fluídas**: Utilização de *View Transitions API* para navegação sem cortes.
+*  **Mobile First**: Totalmente responsivo e otimizado para dispositivos móveis.
+
+---
+
+### Tecnologias Utilizadas
+
+* **Framework:** Angular 21 (Standalone Components)
+* **Reatividade:** Signals API 
+* **Estilização:** Tailwind CSS v4 
+* **Ícones:** Lucide Angular 
+
+---
+
+### Como rodar o projeto
+
+**Para instalar e iniciar o servidor local:**
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+**Para gerar um novo componente:**
 
 ```bash
-ng generate component component-name
+ng generate component nome-do-componente
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+**Para realizar o build de produção:**
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+### Licença
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Este projeto foi desenvolvido por **Rianzynx**. 
