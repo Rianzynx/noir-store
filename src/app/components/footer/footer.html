@@ -1,0 +1,86 @@
+<footer class="bg-black text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
+      
+      <div class="col-span-2 md:col-span-4 lg:col-span-1 mb-8 lg:mb-0">
+        <a routerLink="/" class="font-serif text-2xl lg:text-3xl tracking-wider cursor-pointer">
+          NOIR
+        </a>
+        <p class="text-white/70 text-sm mt-4 max-w-xs">
+          Moda minimalista e elegante para quem valoriza qualidade e estilo atemporal.
+        </p>
+        
+        <div class="flex gap-4 mt-6">
+          <a href="#" class="hover:text-white/70 transition-colors">
+            <lucide-icon [name]="InstaIcon" class="h-5 w-5"></lucide-icon>
+          </a>
+          <a href="#" class="hover:text-white/70 transition-colors">
+            <lucide-icon [name]="FaceIcon" class="h-5 w-5"></lucide-icon>
+          </a>
+          <a href="#" class="hover:text-white/70 transition-colors">
+            <lucide-icon [name]="TwitterIcon" class="h-5 w-5"></lucide-icon>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm tracking-widest uppercase mb-4">Comprar</h3>
+        <ul class="space-y-3">
+          @for (link of footerLinks.shop; track link.name) {
+            <li>
+              <a [routerLink]="link.href" [queryParams]="link.query" class="text-white/70 hover:text-white text-sm transition-colors cursor-pointer">
+                {{ link.name }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm tracking-widest uppercase mb-4">Ajuda</h3>
+        <ul class="space-y-3">
+          @for (link of footerLinks.help; track link.name) {
+            <li>
+              <a [routerLink]="link.href" class="text-white/70 hover:text-white text-sm transition-colors cursor-pointer">
+                {{ link.name }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm tracking-widest uppercase mb-4">Sobre</h3>
+        <ul class="space-y-3">
+          @for (link of footerLinks.about; track link.name) {
+            <li>
+              <a [routerLink]="link.href" class="text-white/70 hover:text-white text-sm transition-colors cursor-pointer">
+                {{ link.name }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm tracking-widest uppercase mb-4">Contato</h3>
+        <ul class="space-y-3 text-sm text-white/70">
+          <li>contato@noir.com.br</li>
+          <li>+55 (11) 99999-0000</li>
+          <li>São Paulo, SP</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-sm text-white/70">
+        © 2026 NOIR. Todos os direitos reservados.
+      </p>
+      <div class="flex gap-6 text-sm text-white/70">
+        <a routerLink="#" class="hover:text-white transition-colors cursor-pointer">Termos de Uso</a>
+        <a routerLink="#" class="hover:text-white transition-colors cursor-pointer">Privacidade</a>
+        <a routerLink="#" class="hover:text-white transition-colors cursor-pointer">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>

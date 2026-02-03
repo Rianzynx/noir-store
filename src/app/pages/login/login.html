@@ -1,0 +1,82 @@
+<div class="flex-1 flex items-center justify-center py-12 px-4">
+  <div class="w-full max-w-md animate-in fade-in zoom-in duration-500">
+      
+      <div class="text-center pt-10 mb-8">
+        <a routerLink="/" class="font-serif text-3xl tracking-wider text-foreground">NOIR</a>
+        <p class="text-muted-foreground mt-2 uppercase text-xs tracking-[0.2em]">Entre na sua conta</p>
+      </div>
+
+      <div class="border border-border p-8 bg-card shadow-sm">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+          
+          <div class="space-y-2">
+            <label class="text-xs font-medium tracking-widest uppercase text-foreground">E-mail</label>
+            <input 
+              formControlName="email"
+              type="email"
+              placeholder="seu@email.com"
+              class="w-full h-12 bg-background border border-border px-4 text-sm focus:border-foreground outline-none transition-all"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label class="text-xs font-medium tracking-widest uppercase text-foreground">Senha</label>
+            <div class="relative">
+              <input 
+                formControlName="password"
+                [type]="showPassword ? 'text' : 'password'"
+                placeholder="Sua senha"
+                class="w-full h-12 bg-background border border-border px-4 pr-12 text-sm focus:border-foreground outline-none transition-all"
+              />
+              <button 
+                type="button" 
+                (click)="togglePassword()"
+                class="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <lucide-icon [name]="showPassword ? EyeOffIcon : EyeIcon" class="h-5 w-5"></lucide-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <label class="flex items-center gap-2 cursor-pointer group">
+              <input type="checkbox" formControlName="remember" class="w-4 h-4 border-border rounded accent-primary">
+              <span class="text-xs text-muted-foreground group-hover:text-foreground transition-colors">Lembrar-me</span>
+            </label>
+            <a routerLink="/forgot-password" class="text-xs text-muted-foreground hover:text-foreground transition-colors uppercase tracking-wider">Esqueceu a senha?</a>
+          </div>
+
+          <button 
+            type="submit" 
+            [disabled]="loginForm.invalid || isLoading"
+            class="w-full h-12 bg-primary cursor-pointer text-primary-foreground text-xs font-bold tracking-[0.2em] uppercase hover:bg-primary/90 transition-all disabled:opacity-80 disabled:cursor-not-allowed"
+          >
+            {{ isLoading ? 'ENTRANDO...' : 'ENTRAR' }}
+          </button>
+        </form>
+
+        <div class="relative my-8">
+          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-border"></div></div>
+          <div class="relative flex justify-center text-[10px] uppercase tracking-[0.2em]">
+            <span class="bg-card px-4 text-muted-foreground">Ou continue com</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <button class="flex items-center justify-center h-12 border border-border hover:bg-accent cursor-pointer transition-colors text-xs font-medium uppercase tracking-wider">
+           <img src="icons/google.png" alt="Google" class="h-5 w-5 mr-2 object-contain">
+            Google
+          </button>
+          <button class="flex items-center justify-center h-12 border border-border hover:bg-accent cursor-pointer transition-colors text-xs font-medium uppercase tracking-wider">
+            <img src="icons/facebook.png" alt="Google" class="h-5 w-5 mr-2 object-contain">
+            Facebook
+          </button>
+        </div>
+      </div>
+
+      <p class="text-center mt-8 text-xs text-muted-foreground tracking-wider">
+        AINDA NÃO TEM UMA CONTA? 
+        <a routerLink="/register" class="text-foreground hover:underline font-bold ml-1">CADASTRE-SE</a>
+      </p>
+    </div>
+</div>

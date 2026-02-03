@@ -1,0 +1,88 @@
+<div class="min-h-screen flex flex-col pt-10 bg-background">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
+    
+    <a routerLink="/products" class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors">
+      <lucide-icon [name]="icons.ArrowLeft" class="h-4 w-4"></lucide-icon>
+      Voltar para Produtos
+    </a>
+
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-16">
+      <div class="space-y-4">
+        <div class="relative aspect-[3/4] bg-muted overflow-hidden">
+          <img [src]="product.images[selectedImageIndex]" [alt]="product.name" class="object-cover w-full h-full transition-all duration-500">
+        </div>
+        <div class="flex gap-4">
+          <button *ngFor="let img of product.images; let i = index" 
+                  (click)="selectedImageIndex = i"
+                  class="relative w-20 h-24 bg-muted border-2 transition-all"
+                  [class.border-primary]="selectedImageIndex === i"
+                  [class.opacity-50]="selectedImageIndex !== i">
+            <img [src]="img" class="object-cover w-full h-full">
+          </button>
+        </div>
+      </div>
+
+      <div class="lg:py-8">
+        <p class="text-xs text-muted-foreground tracking-[0.2em] uppercase mb-2">{{product.category}}</p>
+        <h1 class="font-serif text-3xl lg:text-4xl mb-4">{{product.name}}</h1>
+        <p class="text-2xl mb-6 font-light">{{formatPrice(product.price)}}</p>
+        <p class="text-muted-foreground mb-8 leading-relaxed">{{product.description}}</p>
+
+        <div class="mb-6">
+          <p class="text-xs font-bold uppercase tracking-widest mb-3">Cor: {{selectedColor}}</p>
+          <div class="flex gap-3">
+            <button *ngFor="let color of product.colors" 
+                    (click)="selectedColor = color"
+                    class="px-4 py-2 text-xs border uppercase tracking-tighter transition-all"
+                    [ngClass]="selectedColor === color ? 'bg-primary text-primary-foreground' : 'hover:border-primary'">
+              {{color}}
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <div class="flex items-center justify-between mb-3">
+            <p class="text-xs font-bold uppercase tracking-widest">Tamanho</p>
+            <button class="text-xs text-muted-foreground underline">Guia de Tamanhos</button>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button *ngFor="let size of product.sizes" 
+                    (click)="selectedSize = size"
+                    class="w-12 h-12 text-xs border transition-all"
+                    [ngClass]="selectedSize === size ? 'bg-primary text-primary-foreground border-primary' : 'hover:border-primary'">
+              {{size}}
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-8">
+          <p class="text-xs font-bold uppercase tracking-widest mb-3">Quantidade</p>
+          <div class="flex items-center border border-border w-fit">
+            <button (click)="changeQuantity(-1)" class="p-3 hover:bg-accent"><lucide-icon [name]="icons.Minus" class="h-4 w-4"></lucide-icon></button>
+            <span class="px-6 text-sm font-medium">{{quantity}}</span>
+            <button (click)="changeQuantity(1)" class="p-3 hover:bg-accent"><lucide-icon [name]="icons.Plus" class="h-4 w-4"></lucide-icon></button>
+          </div>
+        </div>
+
+        <div class="flex gap-4 mb-8">
+          <button [disabled]="!selectedSize" class="flex-1 h-14 bg-primary text-primary-foreground uppercase text-xs font-bold tracking-[0.2em] disabled:opacity-50">
+            {{ selectedSize ? 'Adicionar ao Carrinho' : 'Selecione um Tamanho' }}
+          </button>
+          <button class="px-5 border border-border hover:bg-accent"><lucide-icon [name]="icons.Heart" class="h-5 w-5"></lucide-icon></button>
+        </div>
+
+        <div class="border-t border-border">
+          <button (click)="showDetails = !showDetails" class="w-full flex items-center justify-between py-4 text-xs font-bold uppercase tracking-widest">
+            Detalhes do Produto
+            <lucide-icon [name]="icons.ChevronDown" class="h-4 w-4 transition-transform" [class.rotate-180]="showDetails"></lucide-icon>
+          </button>
+          <div *ngIf="showDetails" class="pb-6 text-sm text-muted-foreground space-y-2 animate-in fade-in slide-in-from-top-2">
+            <p><strong>Material:</strong> {{product.material}}</p>
+            <p><strong>Cuidados:</strong> {{product.care}}</p>
+            <p><strong>Código:</strong> NOI-00{{product.id}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

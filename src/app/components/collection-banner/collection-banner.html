@@ -1,0 +1,29 @@
+<section class="relative py-20 lg:py-0 lg:min-h-[80vh] flex items-center bg-black text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+
+            <div class="order-2 lg:order-1">
+                <p class="text-sm tracking-widest text-white/70 uppercase mb-4">
+                    Coleção Essenciais
+                </p>
+                <h2 class="font-serif text-3xl lg:text-5xl xl:text-6xl leading-tight mb-6">
+                    Minimalismo é a nova elegância
+                </h2>
+                <p class="text-white/80 text-lg mb-8 max-w-md">
+                    Uma coleção pensada para compor looks versáteis que transitam do dia à noite com naturalidade e
+                    sofisticação.
+                </p>
+
+                <button
+                    class="border border-white text-white hover:bg-white hover:text-black px-8 py-3 rounded-md bg-transparent flex items-center transition-all duration-300">
+                    Explorar Coleção
+                    <lucide-icon [name]="ArrowIcon" class="ml-2 h-4 w-4"></lucide-icon>
+                </button>
+            </div>
+
+            <div class="order-1 lg:order-2 relative aspect-[4/5] lg:aspect-auto lg:h-[80vh]">
+                <img src="images/collection.jpg" class="w-full h-full object-cover" />
+            </div>
+        </div>
+    </div>
+</section>

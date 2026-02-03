@@ -1,0 +1,40 @@
+<section class="py-20 lg:py-32 bg-background"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center mb-12 lg:mb-16">
+      <p class="text-sm tracking-widest text-gray-500 uppercase mb-3">
+        Explore
+      </p>
+      <h2 class="font-serif text-3xl lg:text-5xl">
+        Navegue por categoria
+      </h2>
+    </div>
+
+    <div class="border-t border-gray-200">
+      @for (category of categories; track $index) {
+        <a
+          [routerLink]="category.href"
+          class="group flex items-center justify-between py-6 lg:py-8 border-b border-gray-200 hover:bg-background transition-colors px-4 -mx-4 cursor-pointer"
+        >
+          <div class="flex items-center gap-4 lg:gap-8">
+            <span class="text-sm text-gray-400">
+              {{ padIndex($index) }}
+            </span>
+            <h3 class="font-serif text-xl lg:text-2xl group-hover:translate-x-2 transition-transform">
+              {{ category.name }}
+            </h3>
+          </div>
+
+          <div class="flex items-center gap-4 lg:gap-8">
+            <span class="text-sm text-gray-400 hidden sm:block">
+              {{ category.count }}
+            </span>
+            <lucide-icon 
+              [name]="ArrowIcon" 
+              class="h-5 w-5 lg:h-6 lg:w-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
+            </lucide-icon>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>

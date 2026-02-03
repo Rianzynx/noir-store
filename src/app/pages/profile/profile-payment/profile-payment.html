@@ -1,0 +1,57 @@
+<div class="router-container">
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+    <div>
+      <h2 class="font-serif text-2xl lg:text-3xl uppercase tracking-tighter">Pagamento</h2>
+      <p class="text-[10px] text-muted-foreground uppercase tracking-[0.2em] mt-2">
+        Gerencie seus cartões e métodos de pagamento salvos
+      </p>
+    </div>
+    <button class="flex items-center justify-center gap-2 bg-primary text-primary-foreground h-12 px-8 text-xs font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-all cursor-pointer">
+      <lucide-icon [name]="icons.Plus" class="h-4 w-4"></lucide-icon>
+      Novo Cartão
+    </button>
+  </div>
+
+  <div class="grid gap-6">
+    @for (card of methods(); track card.id) {
+      <div 
+        class="group border p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 transition-all"
+        [ngClass]="card.isDefault ? 'border-foreground' : 'border-border hover:border-muted-foreground'"
+      >
+        <div class="flex items-center gap-6">
+          <div class="w-16 h-10 bg-muted flex items-center justify-center rounded-sm border border-border">
+            <span class="text-[10px] font-black italic tracking-tighter">{{ card.brand }}</span>
+          </div>
+          
+          <div>
+            <div class="flex items-center gap-3">
+              <p class="font-bold tracking-widest text-sm">•••• •••• •••• {{ card.lastFour }}</p>
+              @if (card.isDefault) {
+                <span class="text-[8px] bg-primary text-primary-foreground px-2 py-0.5 uppercase font-bold tracking-tighter">Principal</span>
+              }
+            </div>
+            <p class="text-xs text-muted-foreground uppercase mt-1">Expira em {{ card.expiry }}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-8">
+          <button 
+            (click)="deleteMethod(card.id)"
+            class="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground hover:text-red-800 transition-colors flex items-center gap-2 cursor-pointer"
+          >
+            <lucide-icon [name]="icons.Trash2" class="h-3.5 w-3.5"></lucide-icon> 
+            Excluir
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="mt-12 p-6 bg-muted/30 border border-dashed border-border flex items-center gap-4">
+    <lucide-icon [name]="icons.ShieldCheck" class="h-6 w-6 text-muted-foreground"></lucide-icon>
+    <p class="text-[10px] text-muted-foreground uppercase tracking-widest leading-relaxed">
+      Suas informações de pagamento são criptografadas e processadas em ambiente seguro. <br>
+      A NOIR não armazena o CVV do seu cartão.
+    </p>
+  </div>
+</div>

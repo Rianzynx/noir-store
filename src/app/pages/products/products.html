@@ -1,0 +1,70 @@
+<div class="min-h-screen flex flex-col pt-10 md:pt-10 bg-background">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+
+            <div class="mb-12">
+                <h1 class="font-serif text-3xl lg:text-5xl mb-4 uppercase tracking-tighter">Coleção Noir</h1>
+                <p class="text-muted-foreground text-sm uppercase tracking-widest">
+                    {{ filteredProducts.length }} {{ filteredProducts.length === 1 ? 'Peça' : 'Peças' }} encontradas
+                </p>
+            </div>
+
+            <div
+                class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-8 border-b border-border">
+
+                <div class="hidden md:flex items-center gap-2">
+                    <button *ngFor="let cat of categories" (click)="selectedCategory = cat.value"
+                        [ngClass]="selectedCategory === cat.value ? 'bg-primary text-primary-foreground' : 'bg-muted hover:bg-accent'"
+                        class="px-5 py-2 text-[10px] uppercase font-bold tracking-widest transition-all">
+                        {{cat.label}}
+                    </button>
+                </div>
+
+                <div class="relative min-w-[200px]">
+                    <select [(ngModel)]="selectedSort"
+                        class="w-full appearance-none bg-background border border-border px-4 py-3 text-[11px] uppercase tracking-widest outline-none focus:border-foreground">
+                        <option *ngFor="let opt of sortOptions" [value]="opt.value">{{opt.label}}</option>
+                    </select>
+                    <lucide-icon [name]="icons.ChevronDown"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none"></lucide-icon>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-6 lg:gap-x-8">
+
+                <div *ngFor="let product of filteredProducts" class="group cursor-pointer"
+                    (mouseenter)="hoveredId = product.id" (mouseleave)="hoveredId = null">
+
+                    <div class="relative aspect-[3/4] mb-4 overflow-hidden bg-muted">
+                        <a [routerLink]="['/product', product.id]">
+                            <img [src]="product.image" [alt]="product.name"
+                                class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105">
+                        </a>
+
+                        <button
+                            class="absolute top-3 right-3 p-2 bg-white text-black rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
+                            <lucide-icon [name]="icons.Heart" class="h-4 w-4"></lucide-icon>
+                        </button>
+
+                        <button
+                            class="absolute bottom-0 left-0 right-0 bg-primary text-primary-foreground py-3 text-[10px] font-bold uppercase tracking-widest translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+
+                    <div [routerLink]="['/product', product.id]">
+                        <h3 class="text-[11px] uppercase font-bold tracking-widest mb-1">{{product.name}}</h3>
+                        <p class="text-sm font-light">{{formatPrice(product.price)}}</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-20">
+                <button
+                    class="px-10 py-4 border border-border hover:bg-foreground hover:text-background transition-colors text-[10px] font-bold uppercase tracking-[0.2em]">
+                    Carregar Mais
+                </button>
+            </div>
+
+        </div>
+</div>

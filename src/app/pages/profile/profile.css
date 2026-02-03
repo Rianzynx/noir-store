@@ -1,0 +1,8 @@
+
+:host-context(main) {
+  view-transition-name: none !important;
+}
+
+.router-container {
+  view-transition-name: profile-subcontent;
+}

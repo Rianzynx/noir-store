@@ -1,0 +1,36 @@
+<section class="py-20 lg:py-32 bg-background">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="text-sm tracking-widest text-gray-400 uppercase mb-3">
+        Newsletter
+      </p>
+      <h2 class="font-serif text-3xl lg:text-5xl mb-6">
+        Fique por dentro das novidades
+      </h2>
+      <p class="text-gray-500 mb-8">
+        Inscreva-se e receba em primeira mão nossas novas coleções, ofertas exclusivas e dicas de estilo.
+      </p>
+
+      <form (submit)="onSubmit(); $event.preventDefault()" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+        <input
+          type="email"
+          name="email"
+          placeholder="Seu melhor e-mail"
+          [(ngModel)]="email"
+class="flex-1 h-12 px-4 bg-gray-100 text-black border-2 border-border rounded-md border-muted-foreground outline-none transition-colors"          required
+        />
+        <button 
+          type="submit" 
+          class="h-12 px-6 bg-black text-white rounded-md flex items-center justify-center hover:bg-black/90 transition-colors"
+        >
+          Inscrever
+          <lucide-icon [name]="ArrowIcon" class="ml-2 h-4 w-4"></lucide-icon>
+        </button>
+      </form>
+
+      <p class="text-xs text-gray-400 mt-4">
+        Ao se inscrever, você concorda com nossa Política de Privacidade.
+      </p>
+    </div>
+  </div>
+</section>

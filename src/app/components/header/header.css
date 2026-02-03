@@ -1,0 +1,10 @@
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  background-color: hsl(var(--background));
+  /* Isso garante que ele nunca entre na dança da View Transition */
+  view-transition-name: header-fixo; 
+}

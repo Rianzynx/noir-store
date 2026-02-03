@@ -1,0 +1,66 @@
+<div class="animate-in fade-in slide-in-from-bottom-4 duration-500">
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+    <div>
+      <h2 class="font-serif text-2xl lg:text-3xl uppercase tracking-tighter">Meus Endereços</h2>
+      <p class="text-[10px] text-muted-foreground uppercase tracking-[0.2em] mt-2">
+        Gerencie seus locais de entrega e cobrança
+      </p>
+    </div>
+    <button class="flex items-center justify-center gap-2 bg-primary text-primary-foreground h-12 px-8 text-xs font-bold uppercase tracking-[0.2em] hover:opacity-90 transition-all cursor-pointer">
+      <lucide-icon [name]="icons.Plus" class="h-4 w-4"></lucide-icon>
+      Novo Endereço
+    </button>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    @for (address of addresses(); track address.id) {
+      <div 
+        class="relative border p-8 bg-card transition-all duration-300"
+        [ngClass]="address.isDefault ? 'border-foreground shadow-sm' : 'border-border hover:border-muted-foreground'"
+      >
+        @if (address.isDefault) {
+          <div class="absolute top-0 right-0 bg-primary text-primary-foreground px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em]">
+            Principal
+          </div>
+        }
+
+        <div class="flex items-start gap-4 mb-8">
+          <div class="p-3 bg-muted">
+            <lucide-icon [name]="icons.MapPin" class="h-5 w-5"></lucide-icon>
+          </div>
+          <div>
+            <h3 class="font-bold uppercase tracking-[0.15em] text-sm">{{ address.title }}</h3>
+            <div class="mt-4 space-y-1 text-sm text-muted-foreground leading-relaxed uppercase tracking-wider">
+              <p>{{ address.street }}</p>
+              <p>{{ address.neighborhood }}</p>
+              <p>{{ address.city }}, {{ address.state }} - {{ address.zip }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-6 border-t border-border">
+          <div class="flex gap-6">
+            <button class="text-[10px] font-bold uppercase tracking-widest hover:text-muted-foreground transition-colors flex items-center gap-2 cursor-pointer">
+              <lucide-icon [name]="icons.Edit2" class="h-3.5 w-3.5"></lucide-icon> Editar
+            </button>
+            <button 
+              (click)="deleteAddress(address.id)"
+              class="text-[10px] font-bold uppercase tracking-widest text-red-800 hover:text-red-600 transition-colors flex items-center gap-2 cursor-pointer"
+            >
+              <lucide-icon [name]="icons.Trash2" class="h-3.5 w-3.5"></lucide-icon> Remover
+            </button>
+          </div>
+
+          @if (!address.isDefault) {
+            <button 
+              (click)="setDefault(address.id)"
+              class="text-[10px] font-bold uppercase tracking-widest hover:underline cursor-pointer"
+            >
+              Tornar padrão
+            </button>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

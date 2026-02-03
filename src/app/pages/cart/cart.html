@@ -1,0 +1,82 @@
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+    <div class="mb-12 pt-10 mb-8">
+      <a routerLink="/products" class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 uppercase tracking-widest font-bold">
+        <lucide-icon [name]="icons.ArrowLeft" class="h-4 w-4"></lucide-icon>
+        Continuar Comprando
+      </a>
+      <h1 class="font-serif text-3xl lg:text-4xl uppercase tracking-tighter">Seu Carrinho</h1>
+      <p class="text-muted-foreground mt-2 uppercase text-xs tracking-widest">
+        {{ cart.items().length }} {{ cart.items().length === 1 ? 'item' : 'itens' }}
+      </p>
+    </div>
+
+    @if (cart.items().length === 0) {
+      <div class="text-center py-20 border border-dashed border-border">
+        <lucide-icon [name]="icons.ShoppingBag" class="h-16 w-16 mx-auto text-muted-foreground/20 mb-6"></lucide-icon>
+        <h2 class="font-serif text-2xl mb-2">Seu carrinho está vazio</h2>
+        <p class="text-muted-foreground mb-8">Explore nossa coleção e encontre peças incríveis.</p>
+        <button routerLink="/products" class="px-8 py-4 bg-primary text-primary-foreground uppercase text-xs font-bold tracking-widest">
+          Ver Produtos
+        </button>
+      </div>
+    } @else {
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2 space-y-8">
+          @for (item of cart.items(); track item.id) {
+            <div class="flex gap-6 pb-8 border-b border-border animate-in fade-in slide-in-from-bottom-4">
+              <div class="relative w-24 h-32 md:w-32 md:h-40 bg-muted shrink-0 overflow-hidden">
+                <img [src]="item.image" [alt]="item.name" class="object-cover w-full h-full">
+              </div>
+              
+              <div class="flex-1 flex flex-col">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3 class="text-sm font-bold uppercase tracking-wider">{{item.name}}</h3>
+                    <p class="text-xs text-muted-foreground mt-2 uppercase tracking-widest">
+                      TAM: {{item.size}} | COR: {{item.color}}
+                    </p>
+                  </div>
+                  <button (click)="cart.removeItem(item.id)" class="p-1 hover:text-red-500 transition-colors">
+                    <lucide-icon [name]="icons.X" class="h-5 w-5"></lucide-icon>
+                  </button>
+                </div>
+
+                <div class="mt-auto flex items-center justify-between pt-4">
+                  <div class="flex items-center border border-border">
+                    <button (click)="cart.updateQuantity(item.id, -1)" class="p-2 hover:bg-muted"><lucide-icon [name]="icons.Minus" class="h-3 w-3"></lucide-icon></button>
+                    <span class="px-4 text-sm font-bold">{{item.quantity}}</span>
+                    <button (click)="cart.updateQuantity(item.id, 1)" class="p-2 hover:bg-muted"><lucide-icon [name]="icons.Plus" class="h-3 w-3"></lucide-icon></button>
+                  </div>
+                  <p class="font-bold text-sm tracking-tighter">{{ formatPrice(item.price * item.quantity) }}</p>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="lg:col-span-1">
+          <div class="bg-muted p-8 sticky top-28">
+            <h2 class="font-serif text-xl mb-6 uppercase tracking-tighter">Resumo</h2>
+            <div class="space-y-4 text-xs tracking-widest uppercase font-medium">
+              <div class="flex justify-between">
+                <span class="text-muted-foreground">Subtotal</span>
+                <span>{{ formatPrice(cart.subtotal()) }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-muted-foreground">Frete</span>
+                <span>{{ cart.shipping() === 0 ? 'Grátis' : formatPrice(cart.shipping()) }}</span>
+              </div>
+              <div class="border-t border-border pt-4 flex justify-between text-base font-bold tracking-tighter">
+                <span>Total</span>
+                <span>{{ formatPrice(cart.total()) }}</span>
+              </div>
+            </div>
+            <button routerLink="/checkout" class="w-full mt-8 py-4 bg-primary text-primary-foreground font-bold uppercase text-[10px] tracking-[0.2em] hover:opacity-90 transition-opacity">
+              Finalizar Compra
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>

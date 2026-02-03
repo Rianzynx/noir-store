@@ -1,0 +1,75 @@
+<div class="router-container">
+  <div class="mb-12">
+    <h2 class="font-serif text-2xl lg:text-3xl uppercase tracking-tighter">Configurações</h2>
+    <p class="text-[10px] text-muted-foreground uppercase tracking-[0.2em] mt-2">
+      Preferências de comunicação e segurança da conta
+    </p>
+  </div>
+
+  <div class="space-y-12">
+    <section>
+      <div class="flex items-center gap-2 mb-6 border-b border-border pb-2">
+        <lucide-icon [name]="icons.Bell" class="h-4 w-4"></lucide-icon>
+        <h3 class="text-xs font-bold uppercase tracking-[0.2em]">Comunicação</h3>
+      </div>
+
+      <div class="space-y-4">
+        <div class="flex items-center justify-between py-2">
+          <div>
+            <p class="text-sm font-medium uppercase tracking-wider">E-mails de Transação</p>
+            <p class="text-[10px] text-muted-foreground uppercase">Resumos de pedidos e atualizações de entrega</p>
+          </div>
+          <button (click)="toggleNotification('email')" 
+                  [ngClass]="notifications().email ? 'bg-foreground' : 'bg-muted'"
+                  class="relative inline-flex h-5 w-10 items-center transition-colors cursor-pointer">
+            <span [ngClass]="notifications().email ? 'translate-x-6' : 'translate-x-1'"
+                  class="inline-block h-3 w-3 bg-background transition-transform"></span>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between py-2">
+          <div>
+            <p class="text-sm font-medium uppercase tracking-wider">Novidades e Lançamentos</p>
+            <p class="text-[10px] text-muted-foreground uppercase">Receba avisos de novas coleções exclusivas</p>
+          </div>
+          <button (click)="toggleNotification('promos')" 
+                  [ngClass]="notifications().promos ? 'bg-foreground' : 'bg-muted'"
+                  class="relative inline-flex h-5 w-10 items-center transition-colors cursor-pointer">
+            <span [ngClass]="notifications().promos ? 'translate-x-6' : 'translate-x-1'"
+                  class="inline-block h-3 w-3 bg-background transition-transform"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="flex items-center gap-2 mb-6 border-b border-border pb-2">
+        <lucide-icon [name]="icons.Shield" class="h-4 w-4"></lucide-icon>
+        <h3 class="text-xs font-bold uppercase tracking-[0.2em]">Segurança</h3>
+      </div>
+      
+      <button class="w-full text-left p-4 border border-border hover:border-foreground transition-colors group cursor-pointer">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-sm font-medium uppercase tracking-wider">Autenticação em Duas Etapas</p>
+            <p class="text-[10px] text-muted-foreground uppercase">Adicione uma camada extra de proteção</p>
+          </div>
+          <span class="text-[10px] font-bold uppercase tracking-widest group-hover:underline">Configurar</span>
+        </div>
+      </button>
+    </section>
+
+    <section class="pt-8 mt-12 border-t border-border">
+      <div class="bg-red-50/50 dark:bg-red-950/10 border border-red-200 dark:border-red-900 p-6">
+        <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-red-800 dark:text-red-400 mb-2">Zona de Perigo</h3>
+        <p class="text-[10px] text-red-700/70 dark:text-red-400/70 uppercase tracking-widest mb-6 leading-relaxed">
+          Ao excluir sua conta, todos os seus dados, histórico de pedidos e lista de desejos serão removidos permanentemente.
+        </p>
+        <button (click)="deleteAccount()" 
+                class="bg-red-800 text-white px-6 h-10 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-red-700 transition-colors cursor-pointer">
+          Excluir minha conta permanentemente
+        </button>
+      </div>
+    </section>
+  </div>
+</div>

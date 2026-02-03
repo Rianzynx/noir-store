@@ -1,0 +1,59 @@
+<div class="min-h-screen pt-24 bg-background text-foreground">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+        <h1 class="font-serif text-3xl mb-8">Minha Conta</h1>
+
+        <div class="grid lg:grid-cols-4 gap-8">
+            <aside class="lg:col-span-1">
+                <nav class="flex flex-col gap-1">
+                    <a routerLink="info" routerLinkActive="bg-primary text-primary-foreground"
+                        class="flex items-center justify-between px-4 py-3 text-sm rounded-md transition-colors">
+                        <span class="flex items-center gap-3">
+                            <lucide-icon [name]="UserIcon" class="h-4 w-4"></lucide-icon> Meus Dados
+                        </span>
+                        <lucide-icon [name]="ChevronIcon" class="h-4 w-4"></lucide-icon>
+                    </a>
+
+                    <a routerLink="orders" routerLinkActive="bg-primary text-primary-foreground"
+                        class="flex items-center justify-between px-4 py-3 text-sm rounded-md transition-colors">
+                        <span class="flex items-center gap-3">
+                            <lucide-icon [name]="PackageIcon" class="h-4 w-4"></lucide-icon> Meus Pedidos
+                        </span>
+                        <lucide-icon [name]="ChevronIcon" class="h-4 w-4"></lucide-icon>
+                    </a>
+
+                    <a routerLink="addresses" routerLinkActive="bg-primary text-primary-foreground"
+                        class="flex items-center justify-between px-4 py-3 text-sm rounded-md transition-colors">
+                        <span class="flex items-center gap-3">
+                            <lucide-icon [name]="PackageIcon" class="h-4 w-4"></lucide-icon> Meus Endereços
+                        </span>
+                        <lucide-icon [name]="ChevronIcon" class="h-4 w-4"></lucide-icon>
+                    </a>
+
+                    <a routerLink="payment" routerLinkActive="bg-primary text-primary-foreground"
+                        class="flex items-center justify-between px-4 py-3 text-sm rounded-md transition-colors">
+                        <span class="flex items-center gap-3">
+                            <lucide-icon [name]="PackageIcon" class="h-4 w-4"></lucide-icon> Métodos de Pagamento
+                        </span>
+                        <lucide-icon [name]="ChevronIcon" class="h-4 w-4"></lucide-icon>
+                    </a>
+
+                    <a routerLink="settings" routerLinkActive="bg-primary text-primary-foreground"
+                        class="flex items-center justify-between px-4 py-3 text-sm rounded-md transition-colors">
+                        <span class="flex items-center gap-3">
+                            <lucide-icon [name]="PackageIcon" class="h-4 w-4"></lucide-icon> Preferências
+                        </span>
+                        <lucide-icon [name]="ChevronIcon" class="h-4 w-4"></lucide-icon>
+                    </a>
+                </nav>
+
+
+            </aside>
+
+            <div class="lg:col-span-3">
+                <div class="p-6 border border-border rounded-lg bg-card"
+                    style="view-transition-name: profile-subcontent;">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,142 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
+  <div class="mb-8">
+    <a routerLink="/cart" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-muted-foreground hover:text-foreground transition-colors mb-6">
+      <lucide-icon [name]="icons.ArrowLeft" class="h-4 w-4"></lucide-icon>
+      Voltar ao Carrinho
+    </a>
+    <h1 class="font-serif text-3xl lg:text-4xl uppercase tracking-tighter">Checkout</h1>
+  </div>
+
+  <div class="flex items-center gap-4 mb-12">
+    @for (label of ['Entrega', 'Pagamento', 'Confirmação']; track label; let i = $index) {
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2" [class.text-muted-foreground]="step() < i + 1">
+          <span class="w-8 h-8 flex items-center justify-center text-xs font-bold transition-colors"
+            [ngClass]="step() >= i + 1 ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'">
+            {{ i + 1 }}
+          </span>
+          <span class="text-[10px] uppercase tracking-widest font-bold hidden sm:block">{{ label }}</span>
+        </div>
+        @if (i < 2) { <div class="w-12 h-px bg-border"></div> }
+      </div>
+    }
+  </div>
+
+  <div class="grid lg:grid-cols-3 gap-8 lg:gap-12">
+    <div class="lg:col-span-2">
+      
+      @if (step() === 1) {
+        <div class="space-y-8 animate-in fade-in slide-in-from-bottom-4">
+          <section>
+            <h2 class="font-serif text-xl mb-6 uppercase">Endereço de Entrega</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+              <input class="flex h-12 w-full border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:border-foreground" placeholder="Nome">
+              <input class="flex h-12 w-full border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:border-foreground" placeholder="Sobrenome">
+              <input class="md:col-span-2 flex h-12 w-full border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:border-foreground" placeholder="E-mail" type="email">
+              <input class="md:col-span-2 flex h-12 w-full border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:border-foreground" placeholder="CEP (00000-000)">
+            </div>
+          </section>
+
+          <section class="border-t border-border pt-8">
+            <h2 class="font-serif text-xl mb-6 uppercase">Método de Envio</h2>
+            <div class="space-y-3">
+              <label class="flex items-center justify-between p-4 border cursor-pointer transition-all"
+                [class.border-primary]="shippingMethod() === 'standard'" [class.bg-muted]="shippingMethod() === 'standard'">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="shipping" value="standard" [checked]="shippingMethod() === 'standard'" (change)="shippingMethod.set('standard')">
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-wider">Envio Padrão (5-7 dias)</p>
+                  </div>
+                </div>
+                <span class="text-sm font-bold">{{ cart.subtotal() > 500 ? 'Grátis' : 'R$ 29,90' }}</span>
+              </label>
+
+              <label class="flex items-center justify-between p-4 border cursor-pointer transition-all"
+                [class.border-primary]="shippingMethod() === 'express'" [class.bg-muted]="shippingMethod() === 'express'">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="shipping" value="express" [checked]="shippingMethod() === 'express'" (change)="shippingMethod.set('express')">
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-wider">Envio Expresso (1-2 dias)</p>
+                  </div>
+                </div>
+                <span class="text-sm font-bold">R$ 49,90</span>
+              </label>
+            </div>
+          </section>
+
+          <button (click)="nextStep()" class="w-full md:w-auto px-12 py-4 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest hover:opacity-90 transition-opacity">
+            Continuar para Pagamento
+          </button>
+        </div>
+      }
+
+      @if (step() === 2) {
+        <div class="space-y-8 animate-in fade-in slide-in-from-right-4">
+          <h2 class="font-serif text-xl mb-6 uppercase">Pagamento</h2>
+          <div class="space-y-4">
+            <div class="relative">
+              <input class="flex h-12 w-full border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:border-foreground" placeholder="0000 0000 0000 0000">
+              <lucide-icon [name]="icons.CreditCard" class="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground"></lucide-icon>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <input class="flex h-12 w-full border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:border-foreground" placeholder="MM/AA">
+              <input class="flex h-12 w-full border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:border-foreground" placeholder="CVV">
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <button (click)="step.set(1)" class="px-8 py-4 border border-border uppercase text-[10px] font-bold tracking-widest hover:bg-muted">Voltar</button>
+            <button (click)="nextStep()" class="flex-1 py-4 bg-primary text-primary-foreground uppercase text-[10px] font-bold tracking-widest">Finalizar Pedido</button>
+          </div>
+        </div>
+      }
+
+      @if (step() === 3) {
+        <div class="text-center py-12 animate-in zoom-in-95 duration-500">
+          <div class="w-16 h-16 bg-primary text-primary-foreground flex items-center justify-center mx-auto mb-6">
+            <lucide-icon [name]="icons.Check" class="h-8 w-8"></lucide-icon>
+          </div>
+          <h2 class="font-serif text-3xl mb-4 uppercase tracking-tighter">Pedido Confirmado!</h2>
+          <p class="text-muted-foreground mb-8 uppercase text-xs tracking-widest">Seu pedido #NOI-{{2026}}-002 foi realizado com sucesso.</p>
+          <button routerLink="/products" class="px-12 py-4 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-widest">Continuar Comprando</button>
+        </div>
+      }
+    </div>
+
+    <div class="lg:col-span-1">
+      <div class="bg-muted p-6 sticky top-28">
+        <h2 class="font-serif text-lg mb-6 uppercase tracking-tighter">Resumo</h2>
+        <div class="space-y-4 mb-6">
+          @for (item of cart.items(); track item.id) {
+            <div class="flex gap-4">
+              <div class="relative w-16 h-20 bg-background shrink-0 overflow-hidden">
+                <img [src]="item.image" class="object-cover w-full h-full">
+                <span class="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-[10px] flex items-center justify-center font-bold">
+                  {{ item.quantity }}
+                </span>
+              </div>
+              <div class="flex-1">
+                <p class="text-[10px] font-bold uppercase tracking-wider">{{ item.name }}</p>
+                <p class="text-[9px] text-muted-foreground uppercase">{{ item.size }} / {{ item.color }}</p>
+                <p class="text-xs mt-1 font-bold">{{ formatPrice(item.price * item.quantity) }}</p>
+              </div>
+            </div>
+          }
+        </div>
+        <div class="space-y-3 text-[10px] uppercase tracking-widest border-t border-border pt-4">
+          <div class="flex justify-between">
+            <span class="text-muted-foreground">Subtotal</span>
+            <span class="font-bold">{{ formatPrice(cart.subtotal()) }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-muted-foreground">Frete</span>
+            <span class="font-bold">{{ shippingCost() === 0 ? 'Grátis' : formatPrice(shippingCost()) }}</span>
+          </div>
+          <div class="border-t border-border pt-3 flex justify-between text-sm font-bold tracking-tighter">
+            <span>Total</span>
+            <span>{{ formatPrice(total()) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
