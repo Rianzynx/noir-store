@@ -3,13 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { LucideAngularModule, Eye, EyeOff, Check } from 'lucide-angular';
-import { Header } from '../../components/header/header';
-import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, LucideAngularModule, Header, Footer],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, LucideAngularModule],
   templateUrl: './register.html'
 })
 export class RegisterPage {
