@@ -1,14 +1,15 @@
 <header class="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border"
     style="view-transition-name: header-estatico;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16 md:h-20">
+        <div class="flex items-center justify-between h-16 md:h-27">
 
-            <button (click)="toggleMenu()" class="md:hidden p-2 -ml-2">
-                <lucide-icon [name]="isMenuOpen ? XIcon : MenuIcon" class="h-5 w-5"></lucide-icon>
+            <button (click)="mobileMenu.open()" class="md:hidden p-2 -ml-2">
+                <lucide-icon [name]="MenuIcon" class="h-5 w-5"></lucide-icon>
             </button>
 
-            <a routerLink="/" class="font-serif text-2xl md:text-3xl tracking-wider cursor-pointer">
-                NOIR
+            <a routerLink="/" class="font-logo cursor-pointer flex items-baseline tracking-tight pb-2 md:pb-10">
+                <span class="text-5xl md:text-8xl">N</span>
+                <span class="text-3xl md:text-6xl -ml-1">oir</span>
             </a>
 
             <nav class="hidden md:flex items-center gap-8">
@@ -43,37 +44,110 @@
                     <lucide-icon [name]="UserIcon" class="h-5 w-5"></lucide-icon>
                 </a>
 
-                <a routerLink="/cart" class="relative p-2 hover:bg-accent rounded-md">
+                <button (click)="cartDrawer.open()" class="relative p-2 hover:bg-accent rounded-md">
                     <lucide-icon [name]="ShoppingBagIcon" class="h-5 w-5"></lucide-icon>
                     <span
                         class="absolute -top-1 -right-1 h-4 w-4 bg-primary text-primary-foreground text-[10px] flex items-center justify-center rounded-full">
                         2
                     </span>
-                </a>
+                </button>
             </div>
         </div>
     </div>
-
-    @if (isMenuOpen) {
-    <div class="md:hidden border-t border-border bg-background">
-        <nav class="flex flex-col py-4">
-            <a routerLink="/products" (click)="isMenuOpen = false"
-                class="px-6 py-3 text-sm tracking-wide hover:bg-accent">
-                NOVIDADES
-            </a>
-            <a [routerLink]="['/products']" [queryParams]="{category: 'feminino'}" (click)="isMenuOpen = false"
-                class="px-6 py-3 text-sm tracking-wide hover:bg-accent">
-                FEMININO
-            </a>
-            <a [routerLink]="['/products']" [queryParams]="{category: 'masculino'}" (click)="isMenuOpen = false"
-                class="px-6 py-3 text-sm tracking-wide hover:bg-accent">
-                MASCULINO
-            </a>
-            <a [routerLink]="['/products']" [queryParams]="{category: 'acessorios'}" (click)="isMenuOpen = false"
-                class="px-6 py-3 text-sm tracking-wide hover:bg-accent">
-                ACESSORIOS
-            </a>
-        </nav>
-    </div>
-    }
 </header>
+
+<app-drawer #cartDrawer direction="right">
+    <h2 drawer-title class="font-serif text-xl uppercase tracking-[0.2em]">Seu Carrinho</h2>
+    <p drawer-description class="text-[10px] text-muted-foreground uppercase tracking-widest mt-1">
+        {{ cartItems().length }} itens selecionados
+    </p>
+
+    <div class="py-8 flex flex-col gap-6">
+        @for (item of cartItems(); track item.id) {
+        <div class="flex gap-4 border-b border-border pb-4">
+            <div class="w-20 h-24 bg-accent shrink-0 overflow-hidden">
+                <img [src]="item.image" class="w-full h-full object-cover" [alt]="item.name">
+            </div>
+            <div class="flex flex-col justify-between py-1 flex-1">
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-tight">{{ item.name }}</h3>
+                    <p class="text-[10px] text-muted-foreground">Tamanho: {{ item.size }}</p>
+                </div>
+                <p class="text-xs font-semibold">{{ item.price | currency:'BRL' }}</p>
+            </div>
+        </div>
+        } @empty {
+        <p class="text-sm text-center text-muted-foreground italic">Seu carrinho está vazio.</p>
+        }
+    </div>
+
+    <div drawer-footer>
+        <div class="flex justify-between items-center mb-4 px-1">
+            <span class="text-[10px] uppercase tracking-widest font-bold">Subtotal</span>
+            <span class="text-sm font-semibold">{{ totalCart() | currency:'BRL' }}</span>
+        </div>
+
+        <a routerLink="/cart" (click)="cartDrawer.closeDrawer()">
+            <button
+                class="w-full bg-primary text-primary-foreground py-4 text-[11px] font-bold uppercase tracking-[0.2em] transition-all hover:opacity-90">
+                Finalizar Compra
+            </button>
+        </a>
+    </div>
+</app-drawer>
+
+<app-drawer #mobileMenu direction="left">
+    <div drawer-title class="pt-4">
+        <a routerLink="/" class="font-logo text-4xl md:text-6xl pb-4 tracking-tight cursor-pointer">
+            Noir
+        </a>
+        <div class="h-[1px] w-[100%] bg-primary mt-2"></div>
+    </div>
+
+    <nav class="flex flex-col gap-1 mt-0">
+        <a routerLink="/products" (click)="mobileMenu.closeDrawer()"
+            class="group flex justify-between items-center py-4 text-sm tracking-[0.2em] border-b border-border/50 hover:pl-2 transition-all">
+            <span>NOVIDADES</span>
+            <lucide-icon [name]="ChevronRightIcon"
+                class="size-4 opacity-0 group-hover:opacity-100 transition-opacity"></lucide-icon>
+        </a>
+        <a [routerLink]="['/products']" [queryParams]="{category: 'feminino'}" (click)="mobileMenu.closeDrawer()"
+            class="group flex justify-between items-center py-4 text-sm tracking-[0.2em] border-b border-border/50 hover:pl-2 transition-all">
+            <span>FEMININO</span>
+            <lucide-icon [name]="ChevronRightIcon"
+                class="size-4 opacity-0 group-hover:opacity-100 transition-opacity"></lucide-icon>
+        </a>
+        <a [routerLink]="['/products']" [queryParams]="{category: 'masculino'}" (click)="mobileMenu.closeDrawer()"
+            class="group flex justify-between items-center py-4 text-sm tracking-[0.2em] border-b border-border/50 hover:pl-2 transition-all">
+            <span>MASCULINO</span>
+            <lucide-icon [name]="ChevronRightIcon"
+                class="size-4 opacity-0 group-hover:opacity-100 transition-opacity"></lucide-icon>
+        </a>
+        <a [routerLink]="['/products']" [queryParams]="{category: 'acessorios'}" (click)="mobileMenu.closeDrawer()"
+            class="group flex justify-between items-center py-4 text-sm tracking-[0.2em] border-b border-border/50 hover:pl-2 transition-all">
+            <span>ACESSÓRIOS</span>
+            <lucide-icon [name]="ChevronRightIcon"
+                class="size-4 opacity-0 group-hover:opacity-100 transition-opacity"></lucide-icon>
+        </a>
+    </nav>
+
+    <div drawer-footer class="flex flex-col gap-2 pb-0">
+        <div class="flex flex-col gap-2">
+            <a routerLink="/login" (click)="mobileMenu.closeDrawer()"
+                class="flex items-center gap-4 text-xs tracking-widest uppercase py-3 hover:text-muted-foreground transition-colors">
+                <lucide-icon [name]="UserIcon" class="size-5"></lucide-icon>
+                Minha Conta
+            </a>
+
+            <button (click)="logout(); mobileMenu.closeDrawer()"
+                class="flex items-center gap-4 text-xs tracking-widest uppercase py-3 text-red-500/80 hover:text-red-500 transition-colors w-full text-left">
+                <lucide-icon [name]="LogOutIcon" class="size-5"></lucide-icon>
+                Sair
+            </button>
+        </div>
+
+        <div class="flex gap-4 pt-4 border-t border-border">
+            <span class="text-[10px] text-muted-foreground tracking-widest uppercase">Noir Store © 2026</span>
+        </div>
+    </div>
+</app-drawer>

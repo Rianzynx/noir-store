@@ -36,5 +36,13 @@ export class FeaturedProducts {
       image: "images/product-3.jpg",
       category: "Vestidos",
     },
+    {
+      id: 4,
+      name: "Calça Alfaiataria",
+      price: 450,
+      image: "images/product-4.jpg",
+      category: "feminino",
+      type: "calcas",
+    },
   ];
 }

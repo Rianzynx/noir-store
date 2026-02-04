@@ -13,6 +13,8 @@ import { ChildrenOutletContexts } from '@angular/router';
   template: `
     <app-header></app-header>
     
+    <div class="h-16 md:h-27"></div>
+
     <main class="min-h-screen  bg-background">
       <router-outlet></router-outlet>
     </main>
