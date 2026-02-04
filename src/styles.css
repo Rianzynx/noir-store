@@ -147,3 +147,17 @@ main {
     @apply bg-background text-foreground;
   }
 }
+
+
+
+@font-face {
+  font-family: 'NoirLogoFont'; 
+  src: url('/fonts/hello-paris/HelloParisSerif-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-logo {
+  font-family: 'NoirLogoFont', serif !important;
+}
