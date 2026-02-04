@@ -1,0 +1,32 @@
+<div *ngIf="isOpen()"
+    class="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm transition-opacity animate-in fade-in duration-300"
+    (click)="closeDrawer()">
+</div>
+
+<div [class]="'fixed z-[101] bg-background flex flex-col h-full border-border transition-transform duration-300 ease-in-out ' + 
+           (isOpen() ? 'translate-x-0 translate-y-0' : '')" [ngClass]="{
+    'inset-y-0 right-0 w-2/3 border-l': direction === 'right',
+    'inset-y-0 left-0 w-2/3 border-r': direction === 'left',
+    'inset-x-0 bottom-0 h-auto max-h-[80vh] w-full border-t rounded-t-2xl': direction === 'bottom',
+    'inset-x-0 top-0 h-auto max-h-[80vh] w-full border-b rounded-b-2xl': direction === 'top',
+    'translate-x-full': direction === 'right' && !isOpen(),
+    '-translate-x-full': direction === 'left' && !isOpen(),
+    'translate-y-full': direction === 'bottom' && !isOpen(),
+    '-translate-y-full': direction === 'top' && !isOpen()
+  }">
+
+    <div *ngIf="direction === 'bottom'" class="mx-auto mt-4 h-1.5 w-12 shrink-0 rounded-full bg-muted"></div>
+
+    <div class="flex flex-col gap-1.5 p-6 border-b border-border/50">
+        <ng-content select="[drawer-title]"></ng-content>
+        <ng-content select="[drawer-description]"></ng-content>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-6">
+        <ng-content></ng-content>
+    </div>
+
+    <div class="mt-auto border-t border-border/50 p-6 flex flex-col gap-2">
+        <ng-content select="[drawer-footer]"></ng-content>
+    </div>
+</div>

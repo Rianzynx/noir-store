@@ -1,0 +1,27 @@
+<div class="relative group w-full px-4">
+  <div class="overflow-hidden cursor-grab active:cursor-grabbing" #emblaRef>
+    <div class="flex -ml-4">
+      <ng-content></ng-content>
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-3 mt-6">
+    <button 
+      (click)="scrollPrev()"
+      [disabled]="!canScrollPrev()"
+      class="p-2.5 border border-border rounded-full transition-all duration-300 hover:bg-white hover:text-black disabled:opacity-20 disabled:cursor-not-allowed"
+      aria-label="Anterior"
+    >
+      <lucide-icon [name]="ArrowLeftIcon" class="size-4"></lucide-icon>
+    </button>
+
+    <button 
+      (click)="scrollNext()"
+      [disabled]="!canScrollNext()"
+      class="p-2.5 border border-border rounded-full transition-all duration-300 hover:bg-white hover:text-black disabled:opacity-20 disabled:cursor-not-allowed"
+      aria-label="Próximo"
+    >
+      <lucide-icon [name]="ArrowRightIcon" class="size-4"></lucide-icon>
+    </button>
+  </div>
+</div>
